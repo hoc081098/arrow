@@ -15,30 +15,30 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v3.0.2
+        uses: actions/checkout@v3.5.0
         with:
           fetch-depth: 0
 
       - name: Set up Java
-        uses: actions/setup-java@v3.4.0
+        uses: actions/setup-java@v3.10.0
         with:
           distribution: 'zulu'
           java-version: 11
 
       - name: build
-        uses: gradle/gradle-build-action@v2.2.0
+        uses: gradle/gradle-build-action@v2.4.0
         if: matrix.os != 'windows-latest'
         with:
           arguments: --full-stacktrace build
 
       - name: mingwX64Test
-        uses: gradle/gradle-build-action@v2.2.0
+        uses: gradle/gradle-build-action@v2.4.0
         if: matrix.os == 'windows-latest'
         with:
           arguments: --full-stacktrace mingwX64Test
 
       - name: Upload reports
-        uses: actions/upload-artifact@v3.1.0
+        uses: actions/upload-artifact@v3.1.2
         with:
           name: 'reports-${{ matrix.os }}'
           path: '**/build/reports/**'
@@ -56,13 +56,13 @@ jobs:
           fetch-depth: 0
 
       - name: Set up Java
-        uses: actions/setup-java@v3.4.0
+        uses: actions/setup-java@v3.10.0
         with:
           distribution: 'zulu'
           java-version: 11
 
       - name: Build
-        uses: gradle/gradle-build-action@v2.2.0
+        uses: gradle/gradle-build-action@v2.4.0
         with:
           arguments: apiDump
 
@@ -70,7 +70,7 @@ jobs:
         run: ./gradlew --stop
 
       - name: "Commit new API files"
-        uses: stefanzweifel/git-auto-commit-action@v4.14.1
+        uses: stefanzweifel/git-auto-commit-action@v4.16.0
         with:
           commit_message: Update API files
           file_pattern: arrow-libs/**/api/*.api
