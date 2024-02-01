@@ -20,19 +20,19 @@ jobs:
           fetch-depth: 0
 
       - name: Set up Java
-        uses: actions/setup-java@v3
+        uses: actions/setup-java@v4
         with:
           distribution: 'zulu'
           java-version: 11
 
       - name: ios and watchos tests
-        uses: gradle/gradle-build-action@v2
+        uses: gradle/gradle-build-action@v3
         with:
           arguments: iosSimulatorArm64Test iosX64Test watchosSimulatorArm64Test watchosX64Test --parallel --scan
 
       - name: Upload reports
         if: failure()
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: 'reports-ios_watchos'
           path: '**/build/reports/**'
@@ -47,19 +47,19 @@ jobs:
           fetch-depth: 0
 
       - name: Set up Java
-        uses: actions/setup-java@v3
+        uses: actions/setup-java@v4
         with:
           distribution: 'zulu'
           java-version: 11
 
       - name: macos and tvos tests
-        uses: gradle/gradle-build-action@v2
+        uses: gradle/gradle-build-action@v3
         with:
           arguments: macosArm64Test macosX64Test tvosSimulatorArm64Test tvosX64Test  --parallel  --scan
 
       - name: Upload reports
         if: failure()
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: 'reports-macos_tvos'
           path: '**/build/reports/**'
@@ -74,19 +74,19 @@ jobs:
           fetch-depth: 0
 
       - name: Set up Java
-        uses: actions/setup-java@v3
+        uses: actions/setup-java@v4
         with:
           distribution: 'zulu'
           java-version: 11
 
       - name: mingwX64Test
-        uses: gradle/gradle-build-action@v2
+        uses: gradle/gradle-build-action@v3
         with:
           arguments: mingwX64Test  --scan
 
       - name: Upload reports
         if: failure()
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: 'reports-windows'
           path: '**/build/reports/**'
@@ -101,19 +101,19 @@ jobs:
           fetch-depth: 0
 
       - name: Set up Java
-        uses: actions/setup-java@v3
+        uses: actions/setup-java@v4
         with:
           distribution: 'zulu'
           java-version: 11
 
       - name: check
-        uses: gradle/gradle-build-action@v2
+        uses: gradle/gradle-build-action@v3
         with:
           arguments: knitCheck apiCheck --scan
 
       - name: Upload reports
         if: failure()
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: 'reports-check'
           path: '**/build/reports/**'
@@ -128,19 +128,19 @@ jobs:
           fetch-depth: 0
 
       - name: Set up Java
-        uses: actions/setup-java@v3
+        uses: actions/setup-java@v4
         with:
           distribution: 'zulu'
           java-version: 11
 
       - name: jvmTest
-        uses: gradle/gradle-build-action@v2
+        uses: gradle/gradle-build-action@v3
         with:
           arguments: jvmTest --scan
 
       - name: Create code coverage report
         if: "! github.event.pull_request.head.repo.fork "
-        uses: gradle/gradle-build-action@v2
+        uses: gradle/gradle-build-action@v3
         with:
           arguments: koverXmlReport
 
@@ -156,7 +156,7 @@ jobs:
 
       - name: Upload reports
         if: failure()
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: 'reports-jvmTest'
           path: '**/build/reports/**'
@@ -171,19 +171,19 @@ jobs:
           fetch-depth: 0
 
       - name: Set up Java
-        uses: actions/setup-java@v3
+        uses: actions/setup-java@v4
         with:
           distribution: 'zulu'
           java-version: 11
 
       - name: jvmTest (K2 enabled)
-        uses: gradle/gradle-build-action@v2
+        uses: gradle/gradle-build-action@v3
         with:
           arguments: "jvmTest -Pkotlin_version=2.0.0-dev-6573 -Pkotlin_repo_url=https://maven.pkg.jetbrains.space/kotlin/p/kotlin/bootstrap -Pkotlin_language_version=2.0 -Pkotlin_api_version=2.0"
 
       - name: Upload reports
         if: failure()
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: 'reports-jvmTest'
           path: '**/build/reports/**'
@@ -198,24 +198,24 @@ jobs:
           fetch-depth: 0
 
       - name: Set up Java
-        uses: actions/setup-java@v3
+        uses: actions/setup-java@v4
         with:
           distribution: 'zulu'
           java-version: 11
 
       - name: kotlinUpgradeYarnLock
-        uses: gradle/gradle-build-action@v2
+        uses: gradle/gradle-build-action@v3
         with:
           arguments: kotlinUpgradeYarnLock
 
       - name: jsTest
-        uses: gradle/gradle-build-action@v2
+        uses: gradle/gradle-build-action@v3
         with:
           arguments: jsTest  --scan
 
       - name: Upload reports
         if: failure()
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: 'reports-js'
           path: '**/build/reports/**'
@@ -230,19 +230,19 @@ jobs:
           fetch-depth: 0
 
       - name: Set up Java
-        uses: actions/setup-java@v3
+        uses: actions/setup-java@v4
         with:
           distribution: 'zulu'
           java-version: 11
 
       - name: linuxX64Test
-        uses: gradle/gradle-build-action@v2
+        uses: gradle/gradle-build-action@v3
         with:
           arguments: linuxX64Test  --scan
 
       - name: Upload reports
         if: failure()
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: 'reports-linux'
           path: '**/build/reports/**'
@@ -257,13 +257,13 @@ jobs:
           fetch-depth: 0
 
       - name: Set up Java
-        uses: actions/setup-java@v3
+        uses: actions/setup-java@v4
         with:
           distribution: 'zulu'
           java-version: 11
 
       - name: apiDump
-        uses: gradle/gradle-build-action@v2
+        uses: gradle/gradle-build-action@v3
         with:
           arguments: apiDump
 
@@ -283,13 +283,13 @@ jobs:
           fetch-depth: 0
 
       - name: Set up Java
-        uses: actions/setup-java@v3
+        uses: actions/setup-java@v4
         with:
           distribution: 'zulu'
           java-version: 11
 
       - name: spotlessApply
-        uses: gradle/gradle-build-action@v2
+        uses: gradle/gradle-build-action@v3
         with:
           arguments: spotlessApply
 
